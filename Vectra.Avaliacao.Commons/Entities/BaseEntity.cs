@@ -1,11 +1,12 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace Vectra.Avaliacao.Backend.Entities
+namespace Vectra.Avaliacao.Commons.Entities
 {
     public class BaseEntity<T>
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("ID")]
         [Required]
         public T Id { get; protected set; }

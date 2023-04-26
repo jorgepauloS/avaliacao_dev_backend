@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Threading;
-using System.Threading.Tasks;
-using Vectra.Avaliacao.Backend.Entities;
+using Vectra.Avaliacao.Commons.Entities;
 
-namespace Vectra.Avaliacao.Backend.Interfaces
+namespace Vectra.Avaliacao.DAL.Context.Interfaces
 {
     public interface IEFContext
     {

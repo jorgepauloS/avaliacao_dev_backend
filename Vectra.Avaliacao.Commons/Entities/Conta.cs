@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace Vectra.Avaliacao.Backend.Entities
+namespace Vectra.Avaliacao.Commons.Entities
 {
     [Table("Conta")]
     public class Conta : BaseEntity<int>

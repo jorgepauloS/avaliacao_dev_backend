@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Vectra.Avaliacao.Backend.Interfaces;
@@ -18,8 +16,8 @@ namespace Vectra.Avaliacao.Backend.DTOs
         public string Message { get; protected set; }
         [JsonProperty("statusCode")]
         public HttpStatusCode StatusCode { get; protected set; }
-        [JsonProperty("collections")]
-        public object collections { get; set; }
+        [JsonProperty("data")]
+        public object Data { get; set; }
         [JsonProperty("count")]
         public int Count { get; set; }
 
@@ -28,12 +26,12 @@ namespace Vectra.Avaliacao.Backend.DTOs
             ErrorMessages.Add(message);
             HasErrors = true;
         }
-        public Task<Response> GenerateResponse(HttpStatusCode statusCode = HttpStatusCode.OK, bool hasError = default, string message = default, object collection = default)
+        public Task<Response> GenerateResponse(HttpStatusCode statusCode = HttpStatusCode.OK, bool hasError = default, string message = default, object data = default)
         {
             StatusCode = statusCode;
             HasErrors = hasError;
             Message = message;
-            collections = collection;
+            Data = data;
             return Task.FromResult(this);
         }
     }

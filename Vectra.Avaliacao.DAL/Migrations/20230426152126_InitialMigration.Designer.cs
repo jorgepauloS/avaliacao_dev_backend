@@ -5,29 +5,37 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Vectra.Avaliacao.Backend.Context;
+using Vectra.Avaliacao.DAL.Context;
 
-namespace Vectra.Avaliacao.Backend.Migrations
+#nullable disable
+
+namespace Vectra.Avaliacao.DAL.Migrations
 {
     [DbContext(typeof(EFContext))]
-    [Migration("20210708144500_InitialMigration")]
+    [Migration("20230426152126_InitialMigration")]
     partial class InitialMigration
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "6.0.0-preview.5.21301.9")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            modelBuilder.Entity("Vectra.Avaliacao.Backend.Entities.Conta", b =>
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Vectra.Avaliacao.Commons.Entities.Conta", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("ID")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("ID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Agencia")
                         .IsRequired()
@@ -62,31 +70,7 @@ namespace Vectra.Avaliacao.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Conta");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Agencia = "9237",
-                            Cliente = "Cliente 1",
-                            CreatedAt = new DateTime(2021, 7, 8, 11, 45, 0, 423, DateTimeKind.Local).AddTicks(5047),
-                            IsActive = true,
-                            Numero = "33521-5",
-                            Saldo = 0.10000000000000001,
-                            UpdatedAt = new DateTime(2021, 7, 8, 11, 45, 0, 423, DateTimeKind.Local).AddTicks(5071)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Agencia = "9237",
-                            Cliente = "Cliente 2",
-                            CreatedAt = new DateTime(2021, 7, 8, 11, 45, 0, 423, DateTimeKind.Local).AddTicks(5117),
-                            IsActive = true,
-                            Numero = "33521-5",
-                            Saldo = 0.10000000000000001,
-                            UpdatedAt = new DateTime(2021, 7, 8, 11, 45, 0, 423, DateTimeKind.Local).AddTicks(5119)
-                        });
+                    b.ToTable("Conta", (string)null);
                 });
 #pragma warning restore 612, 618
         }

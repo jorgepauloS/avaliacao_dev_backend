@@ -1,10 +1,14 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Vectra.Avaliacao.Backend.Migrations
+#nullable disable
+
+namespace Vectra.Avaliacao.DAL.Migrations
 {
+    /// <inheritdoc />
     public partial class InitialMigration : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -25,18 +29,9 @@ namespace Vectra.Avaliacao.Backend.Migrations
                 {
                     table.PrimaryKey("PK_Conta", x => x.ID);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Conta",
-                columns: new[] { "ID", "Agencia", "Cliente", "CREATED_AT", "IS_ACTIVE", "Numero", "Saldo", "UPDATED_AT" },
-                values: new object[] { 1, "9237", "Cliente 1", new DateTime(2021, 7, 8, 11, 45, 0, 423, DateTimeKind.Local).AddTicks(5047), true, "33521-5", 0.10000000000000001, new DateTime(2021, 7, 8, 11, 45, 0, 423, DateTimeKind.Local).AddTicks(5071) });
-
-            migrationBuilder.InsertData(
-                table: "Conta",
-                columns: new[] { "ID", "Agencia", "Cliente", "CREATED_AT", "IS_ACTIVE", "Numero", "Saldo", "UPDATED_AT" },
-                values: new object[] { 2, "9237", "Cliente 2", new DateTime(2021, 7, 8, 11, 45, 0, 423, DateTimeKind.Local).AddTicks(5117), true, "33521-5", 0.10000000000000001, new DateTime(2021, 7, 8, 11, 45, 0, 423, DateTimeKind.Local).AddTicks(5119) });
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

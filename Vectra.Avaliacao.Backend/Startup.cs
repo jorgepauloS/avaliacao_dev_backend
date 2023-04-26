@@ -1,13 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Vectra.Avaliacao.Backend.Context;
 using Vectra.Avaliacao.Backend.DTOs;
 using Vectra.Avaliacao.Backend.Interfaces;
+using Vectra.Avaliacao.IOC;
 
 namespace Vectra.Avaliacao.Backend
 {
@@ -23,7 +22,6 @@ namespace Vectra.Avaliacao.Backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddHttpContextAccessor();
             services.AddDistributedMemoryCache();
@@ -36,12 +34,10 @@ namespace Vectra.Avaliacao.Backend
                 options.CheckConsentNeeded = context => false;
             });
 
-            services.AddDbContext<EFContext>(opt =>
-            {
-                opt.UseSqlServer(Configuration.GetConnectionString("SqlConnection"));
-                opt.UseLazyLoadingProxies();
-            });
-            services.AddTransient<IEFContext, EFContext>();
+            DependencyInjection.AddBusinessLogic(services);
+            DependencyInjection.AddRepositories(services);
+            DependencyInjection.AddContext(services, Configuration);
+
             services.AddScoped<IResponse, Response>();
             services.AddCors(config =>
             {
