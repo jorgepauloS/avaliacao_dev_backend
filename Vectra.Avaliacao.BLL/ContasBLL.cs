@@ -50,7 +50,7 @@ namespace Vectra.Avaliacao.BLL
             conta.UpdatedAt = entity.UpdatedAt;
             conta.IsActive = entity.IsActive;
 
-            return await _repository.Update(entity, cancellationToken);
+            return await _repository.Update(conta, cancellationToken);
         }
     }
 }
